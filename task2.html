@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:blue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: lightgreen;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            padding: 10px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Guess the Number!</h2>
+    <p>I'm thinking of a number between 1 and 100.</p>
+    
+    <input type="number" id="userGuess" placeholder="Enter your guess" min="1" max="100" required>
+    <button onclick="checkGuess()">Submit Guess</button>
+    
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+        const userGuess = parseInt(document.getElementById("userGuess").value);
+        const resultDiv = document.getElementById("result");
+        attempts++;
+
+        if (isNaN(userGuess)) {
+            resultDiv.innerText = "Please enter a valid number.";
+        } else if (userGuess < 1 || userGuess > 100) {
+            resultDiv.innerText = "Please guess a number between 1 and 100.";
+        } else if (userGuess < randomNumber) {
+            resultDiv.innerText = "Too low! Try again.";
+        } else if (userGuess > randomNumber) {
+            resultDiv.innerText = "Too high! Try again.";
+        } else {
+            resultDiv.innerText = `Congratulations! You've guessed the number ${randomNumber} in ${attempts} attempts.`;
+        }
+    }
+</script>
+
+</body>
+</html>
